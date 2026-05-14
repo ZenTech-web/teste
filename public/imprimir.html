@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Comanda</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 60px; }
+    h2 { color: #660099; }
+    p { font-size: 1.1rem; margin-top: 20px; white-space: pre-line; }
+  </style>
+  <script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search)
+      const msg = params.get("msg") || ""
+      document.getElementById("conteudo").textContent = msg
+      window.print()
+    }
+  </script>
+</head>
+<body>
+  <h2>Pedido</h2>
+  <p id="conteudo"></p>
+</body>
+</html>

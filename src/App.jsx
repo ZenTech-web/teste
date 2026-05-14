@@ -5,38 +5,13 @@ const NUMERO_DESTINO = "5581988151055"
 function App() {
   const [valor1, setValor1] = useState("")
   const [valor2, setValor2] = useState("")
-  const [mensagemGerada, setMensagemGerada] = useState("")
-
   function executar(e) {
     e.preventDefault()
-    const msg = `Bem-vindo a Vivo! Seu novo número é ${NUMERO_DESTINO}.\nNome: ${valor1}\nDado: ${valor2}`
-    setMensagemGerada(msg)
+    const conteudo = `Campo 1: ${valor1}\nCampo 2: ${valor2}`
+    const linkImpressao = `${window.location.origin}/imprimir.html?msg=${encodeURIComponent(conteudo)}`
+    const msg = `${conteudo}\n\nImprimir pedido: ${linkImpressao}`
     const url = `https://wa.me/${NUMERO_DESTINO}?text=${encodeURIComponent(msg)}`
     window.open(url, "_blank")
-  }
-
-  function abrirImpressao() {
-    const win = window.open("", "_blank")
-    win.document.write(`
-      <!DOCTYPE html>
-      <html lang="pt-BR">
-        <head>
-          <meta charset="UTF-8" />
-          <title>Impressão</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 60px; }
-            h2 { color: #660099; }
-            p { font-size: 1.1rem; margin-top: 20px; white-space: pre-line; }
-          </style>
-          <script>window.onload = () => window.print()</script>
-        </head>
-        <body>
-          <h2>Vivo</h2>
-          <p>${mensagemGerada.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-        </body>
-      </html>
-    `)
-    win.document.close()
   }
 
   return (
@@ -62,15 +37,6 @@ function App() {
           Enviar
         </button>
 
-        {mensagemGerada && (
-          <button
-            type="button"
-            onClick={abrirImpressao}
-            className="text-blue-600 underline text-sm cursor-pointer text-left"
-          >
-            Clique aqui para imprimir a mensagem
-          </button>
-        )}
       </form>
     </main>
   )
